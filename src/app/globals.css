@@ -1,0 +1,312 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  
+  --font-sans: var(--font-body);
+  --font-display: var(--font-display);
+  --font-tamil: var(--font-tamil);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-container: var(--primary-container);
+  --color-forest-green: var(--forest-green);
+  --color-gold: var(--gold);
+  
+  --color-surface-container: var(--surface-container);
+  --color-surface-container-low: var(--surface-container-low);
+  --color-on-surface: var(--on-surface);
+  --color-on-surface-variant: var(--on-surface-variant);
+  --color-outline: var(--outline);
+  --color-error: var(--error);
+  
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  --radius-sm: calc(var(--radius) * 0.5);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 2);
+}
+
+:root {
+  /* ── Brand palette ─────────────────────────────── */
+  --primary: #0d631b;
+  --primary-foreground: #ffffff;
+  --primary-container: #2e7d32;
+  --forest-green: #1b4332;
+  --gold: #c8a951;
+
+  /* ── Surface system (warm cream — Kuuraii-inspired) ── */
+  --background: #f9f5ed;          /* main page bg — warm cream */
+  --background-alt: #f2ede2;      /* slightly deeper cream for alternating sections */
+  --background-dark: #1b4332;     /* forest green for dark sections */
+
+  --foreground: #1c1c1a;
+  --surface-container: #ede8db;
+  --surface-container-low: #f5f2e8;
+  --on-surface: #1c1c1a;
+  --on-surface-variant: #40493d;
+  --outline: #b5ae9f;
+  --error: #ba1a1a;
+  
+  --card: #ede8db;
+  --card-foreground: #1c1c1a;
+  --popover: #f9f5ed;
+  --popover-foreground: #1c1c1a;
+  --muted: #f5f2e8;
+  --muted-foreground: #5a5449;
+  --secondary: #e2ddd4;
+  --secondary-foreground: #1c1c1a;
+  --accent: #2e7d32;
+  --accent-foreground: #ffffff;
+  --destructive: #ba1a1a;
+  --destructive-foreground: #ffffff;
+  
+  --border: #d8d1c4;
+  --input: #707a6c;
+  --ring: #0d631b;
+  
+  --radius: 0.5rem;
+}
+
+.dark {
+  --primary: #0d631b;
+  --primary-foreground: #ffffff;
+  --primary-container: #2e7d32;
+  --forest-green: #1b4332;
+  --gold: #c8a951;
+  --background: #1b1c17;
+  --background-alt: #222318;
+  --background-dark: #111810;
+  --foreground: #f9f5ed;
+  --surface-container: #40493d;
+  --surface-container-low: #2a3128;
+  --on-surface: #f9f5ed;
+  --on-surface-variant: #e2e3dd;
+  --outline: #707a6c;
+  --error: #ba1a1a;
+  --card: #2a3128;
+  --card-foreground: #f9f5ed;
+  --popover: #1b1c17;
+  --popover-foreground: #f9f5ed;
+  --muted: #40493d;
+  --muted-foreground: #e2e3dd;
+  --secondary: #40493d;
+  --secondary-foreground: #f9f5ed;
+  --accent: #2e7d32;
+  --accent-foreground: #ffffff;
+  --destructive: #ba1a1a;
+  --destructive-foreground: #ffffff;
+  --border: #40493d;
+  --input: #40493d;
+  --ring: #2e7d32;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════
+   BACKGROUND SYSTEM — Kuuraii-inspired
+   ═══════════════════════════════════════════════════════ */
+
+/**
+ * .page-grain
+ * Adds a subtle film-grain noise overlay to any element.
+ * Usage: add class to the section wrapper or body.
+ * 
+ * The SVG turbulence filter generates a seamless noise pattern
+ * entirely in CSS — no external PNG required.
+ */
+.page-grain::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.028;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 200px 200px;
+}
+
+/**
+ * Background watermark utilities
+ * Each class places a different South Indian themed SVG as a faint,
+ * fixed background element. Use on the public site wrapper or individual sections.
+ *
+ * The filter chain converts the black SVG fill to our forest green (#1b4332):
+ *   brightness(0) → pure black → saturate + hue-rotate → green tone
+ */
+
+/* Shared watermark base */
+.bg-watermark::after {
+  content: "";
+  position: fixed;
+  pointer-events: none;
+  z-index: 0;
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.06;
+  /* Convert black SVG to forest green */
+  filter: brightness(0) saturate(100%) invert(20%) sepia(50%) saturate(500%) hue-rotate(100deg) brightness(55%);
+}
+
+/* Banana leaf — tall, side view, right edge */
+.bg-watermark-leaf::after {
+  background-image: url("/images/bg-botanical.svg");
+  right: -4vw;
+  top: 8vh;
+  width: clamp(200px, 26vw, 400px);
+  height: clamp(340px, 65vh, 680px);
+  background-position: right top;
+}
+
+/* Banana leaf plate — wide, bottom right corner */
+.bg-watermark-plate::after {
+  background-image: url("/images/bg-leaf-plate.svg");
+  right: -2vw;
+  bottom: 4vh;
+  width: clamp(200px, 28vw, 420px);
+  height: clamp(130px, 18vh, 280px);
+  background-position: right bottom;
+}
+
+/* Oil lamp — left side, vertically centered */
+.bg-watermark-lamp::after {
+  background-image: url("/images/bg-lamp.svg");
+  left: -3vw;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(100px, 14vw, 220px);
+  height: clamp(130px, 18vh, 280px);
+  background-position: left center;
+}
+
+/* Kolam pattern — center or corner */
+.bg-watermark-kolam::after {
+  background-image: url("/images/bg-kolam.svg");
+  right: 5vw;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(120px, 16vw, 260px);
+  height: clamp(120px, 16vw, 260px);
+  background-position: center;
+  opacity: 0.045;
+}
+
+/* Banana tree — fixed far right, full height */
+.bg-watermark-tree::after {
+  background-image: url("/images/bg-banana-tree.svg");
+  right: -2vw;
+  bottom: 0;
+  width: clamp(120px, 16vw, 240px);
+  height: clamp(200px, 40vh, 450px);
+  background-position: right bottom;
+}
+
+/**
+ * .section-watermark
+ * The Kuuraii-style repeating brand name text watermark on sections.
+ * Apply to individual section wrappers where this effect is desired.
+ */
+.section-watermark {
+  position: relative;
+  overflow: hidden;
+}
+
+.section-watermark::before {
+  content: "SARAVANA CATERS · SARAVANA CATERS · SARAVANA CATERS · SARAVANA CATERS · SARAVANA CATERS · ";
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: clamp(3rem, 6vw, 7rem);
+  letter-spacing: 0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(27, 67, 50, 0.06);
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  line-height: 1;
+  transform: rotate(-8deg) translateY(15%);
+}
+
+/* ── Public website animations ─────────────────────────── */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.3; transform: scaleY(1); }
+  50%       { opacity: 0.7; transform: scaleY(1.15); }
+}
+
+/* ── Section header pattern (Kuuraii editorial split) ─── */
+.section-header {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-header-split {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+}
+
+/* ── Stats card background ────────────────────────────── */
+.stats-card-bg {
+  background-color: #ede8db;
+  background-image: 
+    radial-gradient(ellipse 80% 60% at 30% 50%, rgba(27,67,50,0.04) 0%, transparent 70%);
+}
+
+/* ── Pillars dark panel ───────────────────────────────── */
+.pillars-panel {
+  background-color: #1b4332;
+  background-image:
+    radial-gradient(ellipse 100% 80% at 80% 20%, rgba(200,169,81,0.06) 0%, transparent 60%);
+}
+
+/* ── Glassmorphism navbar ─────────────────────────────── */
+.navbar-glass {
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+}
