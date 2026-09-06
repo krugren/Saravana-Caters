@@ -4,12 +4,7 @@ Full-stack catering business platform built with **Next.js 16**, **SQLite (Drizz
 
 ## Architecture
 
-Two Next.js servers sharing a single codebase and SQLite database:
-
-| Server | Port | Purpose |
-|---|---|---|
-| Public portal | 3000 | Customer-facing website |
-| Admin portal | 3001 | Internal operations hub |
+Two Next.js servers sharing a single codebase and SQLite database — a **public portal** for customers and a separate **admin portal** for internal operations, both gated by the same auth layer.
 
 ## Features
 

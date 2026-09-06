@@ -33,7 +33,6 @@ yarn-error.log*
 
 # env files — never commit secrets
 .env*
-!.env.example
 
 # SEC-07: Local database files — must never be committed
 *.db
